@@ -56,10 +56,10 @@ h1 { margin: 0 0 0 -2px; color: var(--ink); font-size: clamp(58px, 5.9vw, 90px);
 .round-arrow svg { width: 18px; height: 18px; }
 
 .search-bar { position: absolute; z-index: 3; left: 20px; top: 335px; width: min(600px, calc(50% - 56px)); min-height: 76px; padding: 6px 8px 6px 12px; display: flex; align-items: center; border-radius: 55px; border: 1px solid rgba(11,45,57,.06); background: rgba(255,255,255,.97); box-shadow: 0 15px 42px rgba(25,49,57,.1); }
-.search-field { display: flex; align-items: center; min-width: 0; gap: 14px; height: 51px; padding: 0 15px 0 0; }
-.destination-field { flex: 1.15; }
-.date-field { flex: .9; border-left: 1px solid #e8e9e8; padding-left: 15px; }
-.guests-field { position: relative; flex: 1.02; border-left: 1px solid #e8e9e8; padding-left: 15px; }
+.search-field { display: flex; align-items: center; min-width: 0; gap: 10px; height: 51px; padding: 0 12px 0 0; }
+.destination-field { flex: 1.3; }
+.date-field { flex: .84; border-left: 1px solid #e8e9e8; padding-left: 12px; }
+.guests-field { position: relative; flex: .95; border-left: 1px solid #e8e9e8; padding-left: 12px; }
 .field-icon { flex: 0 0 44px; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: #fafaf9; color: #121b21; }
 .field-icon svg { width: 21px; height: 21px; }
 .field-copy { display: flex; min-width: 0; flex-direction: column; gap: 5px; }
