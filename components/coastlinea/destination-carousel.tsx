@@ -1,41 +1,43 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
+import { useRef, useState } from "react";
 import { destinations } from "@/lib/destinations";
+import { FavoriteButton } from "@/components/coastlinea/favorite-button";
 import { Icon } from "@/components/coastlinea/icon";
 
 export function DestinationCarousel() {
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [offset, setOffset] = useState(0);
   const ordered = [...destinations.slice(offset), ...destinations.slice(0, offset)];
 
   function shift(direction: number) {
     setOffset((current) => (current + direction + destinations.length) % destinations.length);
-  }
-
-  function toggleFavorite(name: string) {
-    setFavorites((current) => current.includes(name) ? current.filter((item) => item !== name) : [...current, name]);
+    gridRef.current?.scrollBy({ left: direction * 280, behavior: "smooth" });
   }
 
   return (
     <section className="destinations-section" id="destinations" aria-labelledby="destinations-title">
       <div className="section-heading">
         <div><p className="eyebrow">Popular Destinations</p><h2 id="destinations-title">Handpicked for Your Next Adventure</h2></div>
-        <div className="carousel-controls"><button type="button" onClick={() => shift(-1)} aria-label="Previous destinations"><Icon name="arrow" /></button><button type="button" onClick={() => shift(1)} aria-label="Next destinations"><Icon name="arrow" /></button></div>
+        <div className="carousel-controls" aria-label="Destination carousel controls">
+          <button type="button" onClick={() => shift(-1)} aria-label="Previous destinations"><Icon name="arrow" /></button>
+          <button type="button" onClick={() => shift(1)} aria-label="Next destinations"><Icon name="arrow" /></button>
+        </div>
       </div>
-      <div className="destination-grid">
-        {ordered.map((destination) => {
-          const favorite = favorites.includes(destination.name);
-          return <article className="destination-card" key={destination.name}>
-            <Image className="card-photo" src={destination.image} alt={`${destination.name}, Philippines`} fill sizes="(max-width: 540px) 210px, (max-width: 980px) 230px, 20vw" />
-            <button type="button" className={`favorite-button ${favorite ? "is-favorite" : ""}`} onClick={() => toggleFavorite(destination.name)} aria-label={`${favorite ? "Remove" : "Add"} ${destination.name} ${favorite ? "from" : "to"} favorites`}><Icon name="heart" /></button>
-            <div className="card-copy"><h3>{destination.name}</h3><p className="card-location"><Icon name="location" />{destination.region}</p><p className="card-rating"><span>★</span><strong>{destination.rating}</strong><small>({destination.reviews})</small></p></div>
-            <a className="card-arrow" href="#search" aria-label={`Explore ${destination.name}`}><Icon name="arrow" /></a>
-          </article>;
-        })}
+      <div className="destination-grid" ref={gridRef}>
+        {ordered.map((destination) => (
+          <article className="destination-card" key={destination.slug}>
+            <Image className="card-photo" src={destination.image} alt={`Illustrative coastal artwork for ${destination.name}`} fill sizes="(max-width: 620px) 82vw, (max-width: 1200px) 280px, 20vw" />
+            <Link className="destination-card-link" href={`/destinations/${destination.slug}`} aria-label={`Explore ${destination.name}`} />
+            <FavoriteButton name={destination.name} />
+            <div className="card-copy"><h3>{destination.name}</h3><p className="card-location"><Icon name="location" />{destination.region}</p><span className="card-guide-label">Explore guide</span></div>
+            <Link className="card-arrow" href={`/destinations/${destination.slug}`} aria-label={`View ${destination.name} guide`}><Icon name="arrow" /></Link>
+          </article>
+        ))}
       </div>
-      <p className="sample-disclaimer">* Images are illustrative; traveler count, ratings, and reviews are sample UI data.</p>
+      <p className="sample-disclaimer">Images are illustrative guides to these destinations. No ratings or reviews are displayed without verified data.</p>
     </section>
   );
 }
