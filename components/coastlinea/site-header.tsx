@@ -7,7 +7,7 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <a className="brand" href="#top" aria-label="Coastlinea home">
-        <BrandMark /><span>Coastlinea</span>
+        <BrandMark />
       </a>
       <nav className="main-nav" aria-label="Main navigation">
         {links.map((link, index) => <a className={index === 0 ? "active" : ""} href="#destinations" key={link}>{link}</a>)}

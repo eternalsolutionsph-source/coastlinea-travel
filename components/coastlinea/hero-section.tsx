@@ -7,7 +7,7 @@ export function HeroSection() {
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="hero-copy">
         <p className="eyebrow">Explore <span>•</span> Discover <span>•</span> Belong</p>
-        <h1 id="hero-title">Discover<span className="headline-second"><span className="coral-word">Coastal</span> Escapes</span></h1>
+        <h1 id="hero-title"><span className="headline-first">Discover <span className="coral-word">Coastal</span></span><span className="headline-second">Escapes</span></h1>
         <p className="hero-description">Unforgettable islands, hidden beaches, and amazing<br className="desktop-break" /> experiences across the Philippines and beyond.</p>
       </div>
       <div className="hero-visual">
@@ -20,7 +20,6 @@ export function HeroSection() {
         <a className="location-pill" href="#destinations"><span className="pin"><Icon name="location" /></span><span><strong>El Nido, Palawan</strong><small>Philippines</small></span><span className="round-arrow"><Icon name="arrow" /></span></a>
       </div>
       <SearchBar />
-      <span className="sparkle sparkle-one">✦</span><span className="sparkle sparkle-two">✦</span><span className="sparkle-strokes" aria-hidden="true" />
     </section>
   );
 }
